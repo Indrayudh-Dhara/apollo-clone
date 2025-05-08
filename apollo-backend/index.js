@@ -6,10 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/apollo-clone', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.log('MongoDB connection error: ', err));
 
 const doctorSchema = new mongoose.Schema({
   name: String,
