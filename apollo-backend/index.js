@@ -2,13 +2,23 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+require('dotenv').config();
+
 
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.log('MongoDB connection error: ', err));
+const dbUrl = process.env.MONGODB_URI;
+
+  main().then((res)=>{
+    console.log("connection is successful");
+}).catch((err)=>{{
+    console.log(err);
+}})
+
+  async function main() {
+      await mongoose.connect(dbUrl);
+    }
 
 const doctorSchema = new mongoose.Schema({
   name: String,
