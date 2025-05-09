@@ -34,13 +34,13 @@ export default function AddDoctorForm({onDoctorAdded}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response =  await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/add-doctor`, doctor);
+      const response =  await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/add-doctor`, doctor);
     
       alert('Doctor added successfully!');
       if (onDoctorAdded) onDoctorAdded()
       
     } catch (error) {
-        console.error(err);
+        console.error(error);
     }
   };
 
